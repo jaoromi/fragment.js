@@ -35,7 +35,7 @@
   // Helper function to load jsonp data
   var load_jsonp = function(url, callback, url_parser) {
     var script = doc.createElement('script');
-    script.src = url + (parser.search == '' ? '?' : '&') +
+    script.src = url + (url_parser.search == '' ? '?' : '&') +
       fragment.jsonp + '=JSONPCallback';
 
     win.JSONPCallback = function(data) {
@@ -58,7 +58,7 @@
     url_parser.href = url;
 
     // If the resource is located at the same hostname, assume ajax
-    if (url_parser.hostname == win.location.hostname) {
+    if (url_parser == '' || url_parser.hostname == win.location.hostname) {
       load_xhr(url, callback);
     }
     // If the resource is located at a different hostname, assume jsonp
